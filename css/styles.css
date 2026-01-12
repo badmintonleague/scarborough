@@ -75,6 +75,8 @@ main {
 
   display: flex;
   flex-direction: column;
+  padding-bottom: 32px; /* 👈 ADD THIS */
+
 }
 
 
