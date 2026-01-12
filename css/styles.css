@@ -70,10 +70,13 @@ main {
   background: white;
   box-shadow: -2px 0 6px rgba(0,0,0,0.2);
   padding: 20px;
-  z-index: 5;   /* BELOW header */
+  z-index: 5;             /* BELOW header */
   overflow-y: auto;
-  padding-bottom: 80px; /* 👈 space for location switch */
+
+  display: flex;
+  flex-direction: column;
 }
+
 
 
 #menu a {
@@ -409,13 +412,11 @@ main {
 /* ---------- LOCATION SWITCH ---------- */
 
 .location-switch {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
+  margin-top: auto;   /* 👈 pushes it to the bottom */
   font-size: 14px;
-  z-index: 1;
 }
+
+
 
 
 .location-row {
