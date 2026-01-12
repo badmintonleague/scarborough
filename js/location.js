@@ -6,6 +6,6 @@ function toggleLocationMenu() {
 
 function switchLocation(city) {
   if (city === "pickering") {
-    window.location.href = "pickering/leaderboard.html";
+    window.location.href = "https://badmintonleague.github.io/pickering/leaderboard.html;
   }
 }
