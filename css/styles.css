@@ -403,6 +403,53 @@ main {
   margin: 8px 0;
 }
 
+/* ---------- LOCATION SWITCH ---------- */
+
+.location-switch {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  font-size: 14px;
+}
+
+.location-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #0b3f6e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.location-row:hover {
+  background: #e5e7eb;
+}
+
+.switch-icon {
+  font-size: 16px;
+}
+
+.location-options {
+  margin-top: 8px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.location-options div {
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.location-options div:hover {
+  background: #f3f4f6;
+}
+
 
 
 
