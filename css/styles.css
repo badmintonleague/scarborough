@@ -66,22 +66,18 @@ main {
   top: 56px;
   right: 0;
   width: 200px;
-
-  /* 🔑 Use viewport height correctly */
-  height: calc(100dvh - 56px);
-
+  height: calc(100dvh - 56px); /* 👈 key fix */
   background: white;
   box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+  padding: 20px;
+  padding-bottom: 32px;       /* 👈 breathing room */
   z-index: 5;
 
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-
-  padding: 20px;
-  padding-bottom: calc(32px + env(safe-area-inset-bottom));
-  box-sizing: border-box;
 }
+
 
 
 
