@@ -3,6 +3,10 @@ let STATS = [];
 let ALL_TOURNAMENTS = null;
 let TOURNAMENTS_LOADED_AT = 0;
 
+// 🔹 Rank snapshot (baseline)
+let RANK_SNAPSHOT = {};
+
+
 const leaderboardEl = document.getElementById("leaderboard");
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menu");
@@ -24,9 +28,45 @@ menuBtn.onclick = () => menu.classList.toggle("hidden");
 
   renderLeaderboard();
 
-  // 🔥 Background prefetch (non-blocking)
+  // 🔥 Background tasks (non-blocking)
+  loadRankSnapshot();
   prefetchTournaments();
 })();
+
+/********************
+ * RANK SNAPSHOT
+ ********************/
+
+async function loadRankSnapshot() {
+  try {
+    const rows = await apiGet("getRankSnapshot"); // [{ playerId, rank }]
+    RANK_SNAPSHOT = {};
+    rows.forEach(r => {
+      RANK_SNAPSHOT[r.playerId] = r.rank;
+    });
+
+    renderLeaderboard(); // 🔥 re-render once snapshot is available
+  } catch (e) {
+    console.warn("Rank snapshot unavailable");
+    RANK_SNAPSHOT = {};
+  }
+}
+
+function getRankChange(playerId, currentRank) {
+  const prevRank = RANK_SNAPSHOT[playerId];
+
+  if (prevRank === undefined) {
+    return { text: "—", cls: "rank-same" };
+  }
+
+  const diff = prevRank - currentRank;
+
+  if (diff > 0) return { text: `▲ ${diff}`, cls: "rank-up" };
+  if (diff < 0) return { text: `▼ ${Math.abs(diff)}`, cls: "rank-down" };
+
+  return { text: "—", cls: "rank-same" };
+}
+
 
 
 /********************
@@ -55,9 +95,16 @@ function renderLeaderboard() {
       if (i === 2) card.classList.add("rank-3");
 
       const pd = p.pf - p.pa;
+      const rankChange = getRankChange(p.playerId, i + 1);
       
       card.innerHTML = `
-        <strong>#${i + 1} ${name}</strong><br>
+        <strong>
+          #${i + 1} ${name}
+          <span class="rank-change ${rankChange.cls}">
+            ${rankChange.text}
+          </span>
+        </strong><br>
+
         Win PCT: ${(p.winPct * 100).toFixed(1)}%<br>
         GP: ${p.gamesPlayed} || PD: ${pd > 0 ? "+" : ""}${pd}
       `;
