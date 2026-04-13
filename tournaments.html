@@ -34,19 +34,18 @@
     <button class="cancel-btn" onclick="closeStartModal()">Cancel</button>
   </div>
 
-  <!-- SCORE MODAL -->
+  <!-- SCORE  -->
   <div id="modalBackdrop" class="modal-backdrop hidden"></div>
   <div id="scoreModal" class="modal hidden">
     <h2 id="modalTitle"></h2>
-    <p id="modalTeams"></p>
-
     <div class="score-row">
+      <span id="modalTeamA" class="score-team-label"></span>
       <button class="score-btn" onclick="changeScore('a', -1)">−</button>
       <span id="scoreA">0</span>
       <button class="score-btn" onclick="changeScore('a', 1)">+</button>
     </div>
-
     <div class="score-row">
+      <span id="modalTeamB" class="score-team-label"></span>
       <button class="score-btn" onclick="changeScore('b', -1)">−</button>
       <span id="scoreB">0</span>
       <button class="score-btn" onclick="changeScore('b', 1)">+</button>
